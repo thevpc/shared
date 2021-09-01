@@ -14,16 +14,12 @@ public class AlbumService {
 	public List<Album> findAlbumsBetter(Integer year, String category, String singer) {
 		return allAlbums.stream()
 		.filter(album->
-			(year==null || album.getYear()!=year)
+			(year==null || album.getYear()==year)
 			&&(singer==null || singer.equals(album.getSinger().getName()))
-			&&(singer==null || singer.equals(album.getSinger().getName()))
-			&& (
-					category==null ||
+			&& ( category==null ||
 							album.getSongs().stream().anyMatch(
-									s->category.equals(
-											s.getCategory().getName()
-											)
-									)
+									s->category.equals(s.getCategory().getName())
+							)
 			)
 		)
 		.collect(Collectors.toList());

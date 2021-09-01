@@ -1,4 +1,4 @@
-package tn.corp.mlda.mlda;
+package tn.corp.mlda.mlda.presentation;
 
 import java.util.Iterator;
 
@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import tn.corp.mlda.mlda.App;
 
 public class MainController {
 	@FXML

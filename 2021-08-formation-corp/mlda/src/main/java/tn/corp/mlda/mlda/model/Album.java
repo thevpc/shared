@@ -1,16 +1,28 @@
 package tn.corp.mlda.mlda.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Album {
-	private String description;
 	private String title;
+	private String description;
 	private String image;
 	private Singer singer;
 	private int year;
 	private List<Song> songs = new ArrayList<>();
-
+	public Album() {
+		// TODO Auto-generated constructor stub
+	}
+	public Album(String title,String description,String image,int year,Singer singer,Song[] songs) {
+		this.title=title;
+		this.description=description;
+		this.image=image;
+		this.year=year;
+		this.singer=singer;
+		this.songs.addAll(Arrays.asList(songs));
+	}
+	
 	public String getTitle() {
 		return title;
 	}

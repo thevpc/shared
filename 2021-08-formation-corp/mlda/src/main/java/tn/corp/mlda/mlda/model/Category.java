@@ -8,6 +8,14 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public Category(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+
+
+
 	public String getDescription() {
 		return description;
 	}

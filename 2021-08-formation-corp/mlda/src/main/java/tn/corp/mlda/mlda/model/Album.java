@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Album {
+	private String description;
 	private String title;
 	private String image;
 	private Singer singer;
@@ -18,11 +19,11 @@ public class Album {
 		this.title = title;
 	}
 
-	private String getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	private void setImage(String image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -48,6 +49,14 @@ public class Album {
 
 	public void setSongs(List<Song> songs) {
 		this.songs = songs;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

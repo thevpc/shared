@@ -46,6 +46,7 @@
             <ChoiceBox fx:id="albumFilter" prefWidth="150.0" />
             <Label text="Chanteur" />
             <ChoiceBox fx:id="chanteurFilter" prefWidth="150.0" />
+            <VBox fx:id="board" prefHeight="200.0" prefWidth="100.0" />
          </children>
       </VBox>
    </right>

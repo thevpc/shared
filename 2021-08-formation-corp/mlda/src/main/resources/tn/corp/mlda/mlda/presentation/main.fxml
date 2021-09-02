@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -38,20 +43,24 @@
       <ListView fx:id="categoryList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <VBox prefHeight="460.0" prefWidth="138.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="460.0" prefWidth="138.0" spacing="10.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Année" />
-            <ChoiceBox fx:id="anneeFilter" prefWidth="150.0" />
-            <Label text="Album" />
-            <ChoiceBox fx:id="albumFilter" prefWidth="150.0" />
-            <Label text="Chanteur" />
-            <ChoiceBox fx:id="chanteurFilter" prefWidth="150.0" />
-            <VBox fx:id="board" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="board" prefHeight="70.0" prefWidth="138.0" />
+            <Label text="Année" textFill="WHITE" />
+            <ChoiceBox fx:id="yearFilter" prefWidth="150.0" />
+            <Label text="Chanteur" textFill="WHITE" />
+            <ChoiceBox fx:id="singerFilter" prefWidth="150.0" />
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <effect>
+            <Glow />
+         </effect>
       </VBox>
    </right>
    <center>
-      <GridPane fx:id="musicBox" BorderPane.alignment="CENTER">
+      <GridPane fx:id="musicBox" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #a6bfca, #ebf1f4);" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,4 +75,14 @@
         </rowConstraints>
       </GridPane>
    </center>
+   <bottom>
+      <BarChart fx:id="barChart" prefHeight="73.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </bottom>
 </BorderPane>

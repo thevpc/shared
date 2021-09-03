@@ -1,0 +1,17 @@
+/*
+ This is an example of CSS for the purpose of the Training,
+ see more  at 
+     https://openjfx.io/javadoc/14/javafx.graphics/javafx/scene/doc-files/cssref.html#typefont 
+ */
+ 
+.list-cell {
+    -fx-background-color: null;
+    -fx-text-fill: white;
+    -fx-font-size : 24px;
+}
+.list-cell:selected {
+    -fx-text-fill: yellow;
+}
+.list-view{
+	-fx-background-image: url(sky.jpg);
+}

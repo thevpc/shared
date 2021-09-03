@@ -28,6 +28,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -77,6 +82,14 @@ public class MainController {
 		
 		service.loadData();
 		
+//		categoryList.setBackground(new Background(new BackgroundImage(new Image(
+//	            getClass().getResourceAsStream("sky.jpg")), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+//	            BackgroundPosition.CENTER, new BackgroundSize(100,100,true,true,true,true))));
+		categoryList.setBackground(new Background(new BackgroundImage(new Image(
+				"http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"
+//				getClass().getResourceAsStream("sky.jpg")
+        ), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+        BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
 		categoryList.getItems().add("<Tous>");
 		categoryList.getItems().addAll(service.findCategoryNames());
 		categoryList.getSelectionModel().getSelectedItems().addListener(this::onChangeCategory);
@@ -89,10 +102,9 @@ public class MainController {
 		singerFilter.getItems().addAll(service.findSingerNames());
 		singerFilter.getSelectionModel().selectedItemProperty().addListener(this::onChangeSinger);
 
-		reAppliquerFitre();
+		applyFilters();
 		
 		prepareBoard();
-		prepareBarChart();
 	}
 
 	public void prepareBoard() {
@@ -146,9 +158,6 @@ public class MainController {
 		p.getChildren().add(L);
 		p.getChildren().add(D);
 		p.getChildren().add(A);
-//		board.getChildren().add(
-//				new Circle(10, 10, 10)
-//		);
 		board.getChildren().add(p);
 		Label descr=new Label("Media Library Desktop Application");
 		descr.setFont(new Font(8));
@@ -227,18 +236,18 @@ public class MainController {
 	}
 
 	void onChangeYear(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		reAppliquerFitre();
+		applyFilters();
 	}
 	
 	void onChangeSinger(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		reAppliquerFitre();
+		applyFilters();
 	}
 	
 	public void onChangeCategory(Change<? extends String> ch) {
-		reAppliquerFitre();
+		applyFilters();
 	}
 
-	void reAppliquerFitre() {
+	void applyFilters() {
 		musicBox.getChildren().clear();
 		String category = categoryList.getSelectionModel().getSelectedItem();
 		if ("<Tous>".equals(category)) {
@@ -269,6 +278,7 @@ public class MainController {
 				}
 			}
 		}
+		prepareBarChart();
 	}
 
 	@FXML

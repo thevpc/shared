@@ -4,6 +4,9 @@ public class Singer {
 	private String name;
 	private String image;
 
+	public Singer() {
+	}
+	
 	public Singer(String name, String image) {
 		this.name = name;
 		this.image = image;

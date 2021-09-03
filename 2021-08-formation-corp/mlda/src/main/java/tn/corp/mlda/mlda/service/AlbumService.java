@@ -1,10 +1,16 @@
 package tn.corp.mlda.mlda.service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.thevpc.nuts.NutsContentType;
+import tn.corp.mlda.mlda.Main;
 import tn.corp.mlda.mlda.model.Album;
 import tn.corp.mlda.mlda.model.Category;
 import tn.corp.mlda.mlda.model.Singer;
@@ -18,7 +24,29 @@ public class AlbumService {
 	}
 
 	public void loadData() {
-		// ," ",""
+		// if an old configuration exists, load it from file
+		if (Main.APP_CONTEXT != null) {
+			Path dataJson = Paths.get(Main.APP_CONTEXT.getVarFolder()).resolve("data.json");
+			Main.APP_CONTEXT.getSession().out().printf("reading from %s%n",dataJson);
+			if (Files.exists(dataJson)) {
+				Album[] a = null;
+				try {
+					a = Main.APP_CONTEXT.getWorkspace().elem()
+							.setContentType(NutsContentType.JSON)
+							.parse(dataJson, Album[].class);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (a != null) {
+					allAlbums.addAll(Arrays.asList(a));
+				}
+				if (a != null) {
+					return;
+				}
+			}
+		}
+
+		// create demonstration data whenever there is no previous configuration!
 		Category pop = new Category("Pop",
 				"Pop is a genre of popular music that originated in its modern form during the mid-1950s in the United States and the United Kingdom");
 		Category funk = new Category("Funk",
@@ -40,6 +68,19 @@ public class AlbumService {
 		allAlbums.add(new Album("Plus bleu...", "Single Album", "image.png", 1997, aznavour,
 				new Song[] { new Song("Plus bleu que tes yeux", pop, 360), new Song("Les enfants", pop, 360),
 						new Song("Ce métier", pop, 360) }));
+
+		// try to save the configuration for the next execution
+		if (Main.APP_CONTEXT != null) {
+			Path dataJson = Paths.get(Main.APP_CONTEXT.getVarFolder()).resolve("data.json");
+			Main.APP_CONTEXT.getSession().out().printf("writing to %s%n",dataJson);
+			try {
+				dataJson.getParent().toFile().mkdirs();
+				Main.APP_CONTEXT.getWorkspace().elem().setContentType(NutsContentType.JSON)
+				.setValue(allAlbums).println(dataJson);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public List<String> findCategoryNames() {
